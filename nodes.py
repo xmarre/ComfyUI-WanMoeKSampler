@@ -9,6 +9,15 @@ import latent_preview
 
 
 def wan_ksampler(model_high_noise, model_low_noise, seed, steps, cfgs, sampler_name, scheduler, positive, negative, latent, boundary = 0.875, denoise=1.0, disable_noise=False, start_step=None, last_step=None, force_full_denoise=False):
+    print(
+        "WanMoeKSampler input models:",
+        {
+            "high_type": type(model_high_noise).__name__,
+            "high_dynamic": getattr(model_high_noise, "is_dynamic", lambda: None)(),
+            "low_type": type(model_low_noise).__name__,
+            "low_dynamic": getattr(model_low_noise, "is_dynamic", lambda: None)(),
+        },
+    )
     # boundary is .9 for i2v, .875 for t2v
     latent_image = latent["samples"]
 
